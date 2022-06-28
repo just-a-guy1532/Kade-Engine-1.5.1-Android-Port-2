@@ -525,6 +525,18 @@ class Character extends FlxSprite
 		}
 	}
 
+	function loadOffsetFile(a:String) 
+	{
+        var g:Array<String> = CoolUtil.coolTextFile(Paths.txtOffsets("characters/" + a + "Offsets"));
+        for (b in 0 ... g.length) 
+        {
+        	var c:String = g[b];
+        	var j:Array<String> = c.split(" ");
+        	addOffset(j[0], Std.parseInt(j[1]), Std.parseInt(j[2]));
+        }
+        
+    }
+
 	override function update(elapsed:Float)
 	{
 		if (!curCharacter.startsWith('bf'))
