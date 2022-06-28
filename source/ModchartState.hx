@@ -237,6 +237,16 @@ class ModchartState
 
 	public static var luaSprites:Map<String,FlxSprite> = [];
 
+	function changeGFCharacter(id:String, x:Float, y:Float, ?xFactor:Float = 0.95, ?yFactor:Float = 0.95)
+	{		
+		PlayState.instance.removeObject(PlayState.gf);
+		//PlayState.gf = new Character(x, y, null);
+		PlayState.instance.destroyObject(PlayState.gf);
+		PlayState.gf = new Character(x, y, id);
+		PlayState.gf.scrollFactor.set(xFactor, yFactor);
+		PlayState.instance.addObject(PlayState.gf);
+	}
+
 	function changeDadCharacter(id:String)
 	{				var olddadx = PlayState.dad.x;
 					var olddady = PlayState.dad.y;
@@ -415,6 +425,16 @@ class ModchartState
 				Lua_helper.add_callback(lua,"changeDadCharacter", changeDadCharacter);
 
 				Lua_helper.add_callback(lua,"changeBoyfriendCharacter", changeBoyfriendCharacter);
+				
+				Lua_helper.add_callback(lua,"changeGFCharacter", changeGFCharacter);
+				
+				Lua_helper.add_callback(lua,"changeDadIcon", function(id:String) {
+					PlayState.instance.iconP2.useOldSystem(id);
+				});
+
+				Lua_helper.add_callback(lua,"changeBFIcon", function(id:String) {
+					PlayState.instance.iconP1.useOldSystem(id);
+				});
 	
 				Lua_helper.add_callback(lua,"getProperty", getPropertyByName);
 				
