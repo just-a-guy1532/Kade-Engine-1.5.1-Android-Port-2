@@ -891,14 +891,14 @@ class Character extends FlxSprite
 				switch (curCharacter)
 				{
 					case 'tord':
-						tex = Paths.getSparrowAtlas('characters/tord_assets');
+						frames = Paths.getSparrowAtlas('characters/tord_assets');
 						iconColor = 'FFC11200';
 					case 'tom':
-						tex = Paths.getSparrowAtlas('characters/tom_assets');
+						frames = Paths.getSparrowAtlas('characters/tom_assets');
 						iconColor = 'FF265D86';
 				}
 				
-				frames = tex;
+				//frames = tex;
 
 				animation.addByPrefix('idle', "tord idle", 24, false);
 				animation.addByPrefix('singUP', "tord up", 24, false);
