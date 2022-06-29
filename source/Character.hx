@@ -525,12 +525,12 @@ class Character extends FlxSprite
 						tex = Paths.getSparrowAtlas('characters/WhittySprites');
 						iconColor = 'FF1D1E35';
 					case 'whitty-bw':
-						tex = Paths.getSparrowAtlas('characters/bw/WhittySprites');
+						frames = Paths.getSparrowAtlas('characters/bw/WhittySprites');
 					case 'whitty-b3':
-						tex = Paths.getSparrowAtlas('characters/b3/WhittySprites');
+						frames = Paths.getSparrowAtlas('characters/b3/WhittySprites');
 						iconColor = 'FF1D1E35';
 				}
-				frames = tex;
+				//frames = tex;
 				animation.addByPrefix('idle', 'Idle', 24, false);
 				animation.addByPrefix('singUP', 'Sing Up', 24, false);
 				animation.addByPrefix('singRIGHT', 'Sing Right', 24, false);
