@@ -14,6 +14,8 @@ class Character extends FlxSprite
 
 	public var isPlayer:Bool = false;
 	public var curCharacter:String = 'bf';
+	
+	public var iconColor:String;
 
 	public var holdTimer:Float = 0;
 	
@@ -26,9 +28,11 @@ class Character extends FlxSprite
 		animOffsets = new Map<String, Array<Dynamic>>();
 		curCharacter = character;
 		this.isPlayer = isPlayer;
+		iconColor = isPlayer ? 'FF66FF33' : 'FFFF0000';
 
 		var tex:FlxAtlasFrames;
 		antialiasing = true;
+		pre = "";
 
 		switch (curCharacter)
 		{
@@ -1274,6 +1278,47 @@ class Character extends FlxSprite
 
 				loadOffsetFile('hd-monika');
 
+				playAnim('idle');
+				
+			case 'cassandra' | 'cassandra-bw':
+				switch (curCharacter)
+				{
+					case 'cassandra':
+						tex = Paths.getSparrowAtlas('characters/cassandra');
+						iconColor = 'FF454545';
+					case 'cassandra-bw':
+						tex = Paths.getSparrowAtlas('characters/bw/cassandra');
+				}
+				frames = tex;
+
+				animation.addByPrefix('idle', "Mom Idle", 24, false);
+				animation.addByPrefix('idle-alt', "Mom Idle", 24, false);
+				animation.addByPrefix('singUP', "Mom Up Pose", 24, false);
+				animation.addByPrefix('singDOWN', "MOM DOWN POSE", 24, false);
+				animation.addByPrefix('singLEFT', 'Mom Left Pose', 24, false);
+				animation.addByPrefix('singUP-alt', 'Mom UGH', 24, false);
+				animation.addByPrefix('singRIGHT', 'Mom Pose Left', 24, false);
+
+				if (isPlayer)
+				{
+					addOffset('idle');
+					addOffset('idle-alt');
+					addOffset("singUP", 35, 60);
+					addOffset("singLEFT", 120, -55);
+					addOffset("singRIGHT", -35, -25);
+					addOffset("singDOWN", 80, -160);
+					addOffset("singUP-alt", -35, -25);	
+				}
+				else
+				{
+					addOffset('idle');
+					addOffset('idle-alt');
+					addOffset("singUP", 14, 71);
+					addOffset("singRIGHT", 10, -60);
+					addOffset("singLEFT", 250, -23);
+					addOffset("singDOWN", 20, -160);
+					addOffset("singUP-alt", 250, -23);
+				}
 				playAnim('idle');
 				
 			case 'spooky':
