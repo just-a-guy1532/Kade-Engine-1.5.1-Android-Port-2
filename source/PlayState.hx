@@ -818,6 +818,23 @@ class PlayState extends MusicBeatState
 				tank3.animation.addByPrefix('idle', 'fg', 24, false);
 				tank3.scrollFactor.set(1.5, 1.5);
 				tank3.antialiasing = true;
+                        }
+		          case 'garStage':
+		          {
+		                  defaultCamZoom = 0.9;
+						  curStage = 'garStage';
+
+						  var bg:FlxSprite = new FlxSprite(-500, -170).loadGraphic(Paths.image('garcello/garStagebg'));
+						  bg.antialiasing = true;
+						  bg.scrollFactor.set(0.7, 0.7);
+						  bg.active = false;
+						  add(bg);
+
+						  var bgAlley:FlxSprite = new FlxSprite(-500, -200).loadGraphic(Paths.image('garcello/garStage'));
+						  bgAlley.antialiasing = true;
+						  bgAlley.scrollFactor.set(0.9, 0.9);
+						  bgAlley.active = false;
+						  add(bgAlley);
 				}
 			default:
 			{
