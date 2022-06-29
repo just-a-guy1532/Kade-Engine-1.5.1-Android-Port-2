@@ -226,6 +226,8 @@ class PlayState extends MusicBeatState
 	
 	public function addObject(object:FlxBasic) { add(object); }
 	public function removeObject(object:FlxBasic) { remove(object); }
+	public function destroyObject(object:FlxBasic) { object.destroy(); }
+	public function writeStuff(timer:Int, word:String) { startWriting(timer, word); }
 
 
 	override public function create()
@@ -3486,6 +3488,7 @@ class PlayState extends MusicBeatState
 
 	var lightningStrikeBeat:Int = 0;
 	var lightningOffset:Int = 8;
+	var ruvShakeBeat:Int = 0;
 
 	override function beatHit()
 	{
