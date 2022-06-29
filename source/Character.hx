@@ -1363,16 +1363,16 @@ class Character extends FlxSprite
 				switch (curCharacter)
 				{
 					case 'mom-car':
-						tex = Paths.getSparrowAtlas('characters/momCar');
+						frames = Paths.getSparrowAtlas('characters/momCar');
 						iconColor = 'FFd8558e';
 					case 'exgf':
-						tex = Paths.getSparrowAtlas('characters/exGF');
+						frames = Paths.getSparrowAtlas('characters/exGF');
 						iconColor = 'FF64FFC1';
 					case 'freddy':
-						tex = Paths.getSparrowAtlas('characters/freddy');
+						frames = Paths.getSparrowAtlas('characters/freddy');
 						iconColor = 'FF6D3B0E';
 				}
-				frames = tex;
+				//frames = tex;
 
 				animation.addByPrefix('idle', "Mom Idle", 24, false);
 				animation.addByPrefix('singUP', "Mom Up Pose", 24, false);
