@@ -233,7 +233,6 @@ class Character extends FlxSprite
 						tex = Paths.getSparrowAtlas('characters/playableexGF');
 						iconColor = 'FF64FFC1';
 				}
-				
 				frames = tex;
 				animation.addByPrefix('idle', 'BF idle dance', 24, false);
 				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
