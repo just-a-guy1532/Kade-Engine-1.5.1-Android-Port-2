@@ -2,6 +2,15 @@ package;
 
 import flixel.FlxSprite;
 
+import sys.io.File;
+import haxe.io.Path;
+import Sys;
+import openfl.utils.ByteArray;
+import flash.display.BitmapData;
+import sys.FileSystem;
+
+using StringTools;
+
 class HealthIcon extends FlxSprite
 {
 	/**
@@ -9,10 +18,40 @@ class HealthIcon extends FlxSprite
 	 */
 	public var sprTracker:FlxSprite;
 
-	public function new(char:String = 'bf', isPlayer:Bool = false)
+	public var char:String = 'bf';
+	public var isPlayer:Bool = false;
+	public var isOldIcon:Bool = false;
+
+	public function new(?char:String = 'bf', ?isPlayer:Bool = false)
 	{
 		super();
-		
+
+		this.char = char;
+		this.isPlayer = isPlayer;
+
+		useOldSystem(char);
+		scrollFactor.set();
+	}
+
+	public function changeIcon(char:String)
+	{
+		if (!FileSystem.exists(Paths.image(Main.path + 'icons/icon-' + char)))
+			char = 'face';
+
+		var rawPic = BitmapData.fromFile(Main.path + Paths.image('icons/icon-'+char));
+		loadGraphic(rawPic, true, 150, 150);
+
+		if (char.endsWith('-pixel') || char.startsWith('senpai') || char.startsWith('spirit'))
+			antialiasing = false;
+		else
+			antialiasing = true;
+
+		animation.add(char, [0, 1], 0, false, isPlayer);
+		animation.play(char);
+	}
+
+	public function useOldSystem(char:String)
+	{
 		loadGraphic(Paths.image('iconGrid'), true, 150, 150);
 
 		antialiasing = true;
@@ -532,15 +571,16 @@ class HealthIcon extends FlxSprite
 		animation.add('exe-revie', [716, 717], 0, false, isPlayer);
 		animation.add('bf-cryingchild', [718, 719], 0, false, isPlayer);
 		animation.add('cc', [720, 721], 0, false, isPlayer);
-		animation.play(char);
 
-		switch(char)
-		{
-			case 'bf-pixel' | 'senpai' | 'senpai-angry' | 'spirit' | 'gf-pixel':
-				antialiasing = false;
+		if (animation.getByName(char) != null) {
+			animation.play(char);
 		}
-
-		scrollFactor.set();
+		else {
+			changeIcon(char);
+		}		
+		
+		if (char.startsWith('senpai') || char.contains('pixel') || char.startsWith('spirit') || char.startsWith('monika') && char != 'monika-real')
+			antialiasing = false;
 	}
 
 	override function update(elapsed:Float)
