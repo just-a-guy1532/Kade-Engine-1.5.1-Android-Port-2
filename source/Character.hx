@@ -1283,12 +1283,12 @@ class Character extends FlxSprite
 				switch (curCharacter)
 				{
 					case 'cassandra':
-						tex = Paths.getSparrowAtlas('characters/cassandra');
+						frames = Paths.getSparrowAtlas('characters/cassandra');
 						iconColor = 'FF454545';
 					case 'cassandra-bw':
-						tex = Paths.getSparrowAtlas('characters/bw/cassandra');
+						frames = Paths.getSparrowAtlas('characters/bw/cassandra');
 				}
-				frames = tex;
+				//frames = tex;
 
 				animation.addByPrefix('idle', "Mom Idle", 24, false);
 				animation.addByPrefix('idle-alt', "Mom Idle", 24, false);
