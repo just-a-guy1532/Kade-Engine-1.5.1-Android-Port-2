@@ -169,6 +169,18 @@ class PlayState extends MusicBeatState
 	var upperBoppers:FlxSprite;
 	var bottomBoppers:FlxSprite;
 	var santa:FlxSprite;
+	//tankman shit
+	var tankRolling:FlxSprite;
+	var tankX:Int = 400;
+	var tankSpeed:Float = FlxG.random.float(5, 7);
+	var tankAngle:Float = FlxG.random.float(-90, 45);
+	var tank0:FlxSprite;
+	var tank1:FlxSprite;
+	var tank2:FlxSprite;
+	var tank3:FlxSprite;
+	var tank4:FlxSprite;
+	var tank5:FlxSprite;
+	var tankWatchtower:FlxSprite;
 
 	var fc:Bool = true;
 
@@ -695,6 +707,117 @@ class PlayState extends MusicBeatState
 						stageCurtains.active = false;
 	
 						add(stageCurtains);
+			}
+			case 'tank':
+			{
+				defaultCamZoom = 0.9;
+				curStage = "tank";
+				
+				var tankSky:FlxSprite = new FlxSprite(-400, -400).loadGraphic(Paths.image('tank/tankSky'));
+				tankSky.antialiasing = true;
+				tankSky.scrollFactor.set(0, 0);
+				add(tankSky);
+				
+				var tankClouds:FlxSprite = new FlxSprite(-700, -100).loadGraphic(Paths.image('tank/tankClouds'));
+				tankClouds.antialiasing = true;
+				tankClouds.scrollFactor.set(0.1, 0.1);
+				add(tankClouds);
+				
+				var tankMountains:FlxSprite = new FlxSprite(-300, -20).loadGraphic(Paths.image('tank/tankMountains'));
+				tankMountains.antialiasing = true;
+				tankMountains.setGraphicSize(Std.int(tankMountains.width * 1.1));
+				tankMountains.scrollFactor.set(0.2, 0.2);
+				tankMountains.updateHitbox();
+				add(tankMountains);
+				
+				var tankBuildings:FlxSprite = new FlxSprite(-200, 0).loadGraphic(Paths.image('tank/tankBuildings'));
+				tankBuildings.antialiasing = true;
+				tankBuildings.setGraphicSize(Std.int(tankBuildings.width * 1.1));
+				tankBuildings.scrollFactor.set(0.3, 0.3);
+				tankBuildings.updateHitbox();
+				add(tankBuildings);
+				
+				var tankRuins:FlxSprite = new FlxSprite(-200, 0).loadGraphic(Paths.image('tank/tankRuins'));
+				tankRuins.antialiasing = true;
+				tankRuins.setGraphicSize(Std.int(tankRuins.width * 1.1));
+				tankRuins.scrollFactor.set(0.35, 0.35);
+				tankRuins.updateHitbox();
+				add(tankRuins);
+
+				var smokeLeft:FlxSprite = new FlxSprite(-200, -100).loadGraphic(Paths.image('tank/smokeLeft'));
+				smokeLeft.frames = Paths.getSparrowAtlas('tank/smokeLeft');
+				smokeLeft.animation.addByPrefix('idle', 'SmokeBlurLeft', 24, true);
+				smokeLeft.animation.play('idle');
+				smokeLeft.scrollFactor.set (0.4, 0.4);
+				smokeLeft.antialiasing = true;
+				add(smokeLeft);
+
+				var smokeRight:FlxSprite = new FlxSprite(1100, -100).loadGraphic(Paths.image('tank/smokeRight'));
+				smokeRight.frames = Paths.getSparrowAtlas('tank/smokeRight');
+				smokeRight.animation.addByPrefix('idle', 'SmokeRight', 24, true);
+				smokeRight.animation.play('idle');
+				smokeRight.scrollFactor.set (0.4, 0.4);
+				smokeRight.antialiasing = true;
+				add(smokeRight);
+				
+				tankWatchtower = new FlxSprite(100, 50);
+				tankWatchtower.frames = Paths.getSparrowAtlas('tank/tankWatchtower');
+				tankWatchtower.animation.addByPrefix('idle', 'watchtower gradient color', 24, false);
+				tankWatchtower.animation.play('idle');
+				tankWatchtower.scrollFactor.set(0.5, 0.5);
+				tankWatchtower.antialiasing = true;
+				add(tankWatchtower);
+				
+				tankRolling = new FlxSprite(300,300);
+				tankRolling.frames = Paths.getSparrowAtlas('tank/tankRolling');
+				tankRolling.animation.addByPrefix('idle', 'BG tank w lighting ', 24, true);
+				tankRolling.scrollFactor.set(0.5, 0.5);
+				tankRolling.antialiasing = true;
+				tankRolling.animation.play('idle');
+					
+				add(tankRolling);	
+				
+				var tankGround:FlxSprite = new FlxSprite(-420, -150).loadGraphic(Paths.image('tank/tankGround'));
+				tankGround.setGraphicSize(Std.int(tankGround.width * 1.15));
+				tankGround.updateHitbox();
+				tankGround.antialiasing = true;
+				add(tankGround);
+
+				tank0 = new FlxSprite(-500, 650);
+				tank0.frames = Paths.getSparrowAtlas('tank/tank0');
+				tank0.animation.addByPrefix('idle', 'fg tankhead far right', 24, false);
+				tank0.scrollFactor.set(1.7, 1.5);
+				tank0.antialiasing = true;
+
+				tank1 = new FlxSprite(-300, 750);
+				tank1.frames = Paths.getSparrowAtlas('tank/tank1');
+				tank1.animation.addByPrefix('idle', 'fg', 24, false);
+				tank1.scrollFactor.set(2, 0.2);
+				tank1.antialiasing = true;
+
+				tank2 = new FlxSprite(450, 940);
+				tank2.frames = Paths.getSparrowAtlas('tank/tank2');
+				tank2.animation.addByPrefix('idle', 'foreground', 24, false);
+				tank2.scrollFactor.set(1.5, 1.5);
+				tank2.antialiasing = true;
+
+				tank4 = new FlxSprite(1300, 900);
+				tank4.frames = Paths.getSparrowAtlas('tank/tank4');
+				tank4.animation.addByPrefix('idle', 'fg', 24, false);
+				tank4.scrollFactor.set(1.5, 1.5);
+				tank4.antialiasing = true;
+
+				tank5 = new FlxSprite(1620, 700);
+				tank5.frames = Paths.getSparrowAtlas('tank/tank5');
+				tank5.animation.addByPrefix('idle', 'fg', 24, false);
+				tank5.scrollFactor.set(1.5, 1.5);
+				tank5.antialiasing = true;
+
+				tank3 = new FlxSprite(1300, 1200);
+				tank3.frames = Paths.getSparrowAtlas('tank/tank3');
+				tank3.animation.addByPrefix('idle', 'fg', 24, false);
+				tank3.scrollFactor.set(1.5, 1.5);
+				tank3.antialiasing = true;
 				}
 			default:
 			{
@@ -1042,6 +1165,9 @@ class PlayState extends MusicBeatState
 		{
 			switch (curSong.toLowerCase())
 			{
+				case 'nerves':
+					FlxG.sound.play(Paths.sound('garWeak'));
+					startCountdown();
 				default:
 					startCountdown();
 			}
@@ -3293,6 +3419,22 @@ class PlayState extends MusicBeatState
 		boyfriend.playAnim('scared', true);
 		gf.playAnim('scared', true);
 	}
+	
+	function ruvShake():Void
+	{
+		FlxG.camera.shake(0.005, 0.1);
+		ruvShakeBeat = curBeat;
+	
+		if (curSong == 'Ugh' && curBeat == 223)
+		{
+			FlxG.camera.shake(0.03, 0.1);
+		}	
+		
+		if (gf.animOffsets.exists('scared'))
+		{
+			gf.playAnim('scared', true);
+		}
+	}
 
 	var danced:Bool = false;
 
@@ -3413,6 +3555,18 @@ class PlayState extends MusicBeatState
 			case 'school':
 				if(FlxG.save.data.distractions){
 					bgGirls.dance();
+				}
+				
+			case 'tank':
+				if (curBeat % 2 == 0)
+				{	
+					tankWatchtower.animation.play('idle', true);
+					tank0.animation.play('idle', true);
+					tank1.animation.play('idle', true);
+					tank2.animation.play('idle', true);
+					tank4.animation.play('idle', true);
+					tank5.animation.play('idle', true);
+					tank3.animation.play('idle', true);
 				}
 
 			case 'mall':
