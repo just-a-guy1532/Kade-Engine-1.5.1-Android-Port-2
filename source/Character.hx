@@ -227,13 +227,13 @@ class Character extends FlxSprite
 				switch (curCharacter)
 				{
 					case 'bf-annie':
-						tex = Paths.getSparrowAtlas('characters/annie');
+						frames = Paths.getSparrowAtlas('characters/annie');
 						iconColor = 'FF1D2A2C';
 					case 'bf-exgf':
-						tex = Paths.getSparrowAtlas('characters/playableexGF');
+						frames = Paths.getSparrowAtlas('characters/playableexGF');
 						iconColor = 'FF64FFC1';
 				}
-				frames = tex;
+				//frames = tex;
 				animation.addByPrefix('idle', 'BF idle dance', 24, false);
 				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
 				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
