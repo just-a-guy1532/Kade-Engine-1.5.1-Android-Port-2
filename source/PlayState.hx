@@ -227,7 +227,7 @@ class PlayState extends MusicBeatState
 	public function addObject(object:FlxBasic) { add(object); }
 	public function removeObject(object:FlxBasic) { remove(object); }
 	public function destroyObject(object:FlxBasic) { object.destroy(); }
-	public function writeStuff(timer:Int, word:String) { startWriting(timer, word); }
+	//public function writeStuff(timer:Int, word:String) { startWriting(timer, word); }
 
 
 	override public function create()
@@ -1196,23 +1196,7 @@ class PlayState extends MusicBeatState
 			rep = new Replay("na");
 
 		super.create();
-		
-	var writing:Bool = false;
-
-	function startWriting(timer:Int = 15, word:String = ''):Void {
-		canPause = false;
-		writing = true;
-		persistentUpdate = true;
-		persistentDraw = true;
-		var realTimer = timer;
-		var textState = new TextSubState(realTimer, word);
-		textState.win = finishedWriting;
-		textState.lose = death;
-		textState.cameras = [camHUD];
-		FlxG.autoPause = false;
-		openSubState(textState);
 	}
-}
 
 	function schoolIntro(?dialogueBox:DialogueBox):Void
 	{
